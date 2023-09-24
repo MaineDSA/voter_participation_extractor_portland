@@ -12,23 +12,23 @@ FOOTERLINES = 1
 def voter(lines:list):
 	ward, voterid, votername, address, status = re.findall('^(\d+\-\d+) (\d+) (.*?) (\d.*?) ([A-Z]+)$', lines[0])[0]
 	history = lines[1]
-	party, ballot = re.findall('^([A-Z]+) ([A-Z]+)$', lines[2])[0]
+	party, ballot = lines[2].split(' ')
 	output.append([ward, voterid, party, votername, history, address, status, ballot])
 
 # Iterate through voters.
 def voters(pagetext:str):
-    lines = pagetext.splitlines()
-    pagenumber = int(re.findall('Page (\d+) of', lines[-1])[0])
-    num_voters = (len(lines) - HEADERLINES - FOOTERLINES) // LINESPERVOTER
-    print(f'Found {num_voters} voters on page {pagenumber}')
-    for n in range(HEADERLINES, len(lines) - (FOOTERLINES + 1), LINESPERVOTER):
-        print(f'Iterating over voter {((n - HEADERLINES) // 3) + 1}')
-        voter([lines[n], lines[n+1], lines[n+2]])
+	lines = pagetext.splitlines()
+	pagenumber = int(re.findall('Page (\d+) of', lines[-1])[0])
+	num_voters = (len(lines) - HEADERLINES - FOOTERLINES) // LINESPERVOTER
+	print(f'Found {num_voters} voters on page {pagenumber}')
+	for n in range(HEADERLINES, len(lines) - (FOOTERLINES + 1), LINESPERVOTER):
+		print(f'Iterating over voter {((n - HEADERLINES) // 3) + 1}')
+		voter(lines[n:n+LINESPERVOTER])
 
 # Read PDF into pages and iterate over them as text strings.
 def read_voters_pages():
 	pdf = pdfium.PdfDocument("./Voter Participation History.pdf")
-	print(f'Found {int(len(pdf))} pages in PDF')
+	print(f'Found {len(pdf)} pages in PDF')
 	for n in range(1,len(pdf)): # skip title page
 		voters(pdf[n].get_textpage().get_text_range())
 		if TESTMODE:
