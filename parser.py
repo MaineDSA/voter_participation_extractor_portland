@@ -10,24 +10,20 @@ FOOTERLINES = 1
 
 # Extract data from group
 def voter(lines:list):
-	ward = re.findall('^(\d+\-\d+) ', lines[0])[0]
-	voterid = re.findall(f'{re.escape(ward)} (.+?) ', lines[0])[0]
-	party = re.findall(f'^([A-Z]+) [A-Z]+$', lines[2])[0]
-	votername = re.findall(f'{re.escape(voterid)} (.+?) \d', lines[0])[0]
+	ward, voterid, votername, address, status = re.findall('^(\d+\-\d+) (\d+) (.*?) (\d.*?) ([A-Z]+)$', lines[0])[0]
 	history = lines[1]
-	address = re.findall(f'{re.escape(votername)} (.+?) [A-Z]+$', lines[0])[0]
-	status = re.findall(f'{re.escape(address)} ([A-Z]+)$', lines[0])[0]
-	ballot = re.findall(f'{re.escape(party)} ([A-Z]+)$', lines[2])[0]
+	party, ballot = re.findall('^([A-Z]+) ([A-Z]+)$', lines[2])[0]
 	output.append([ward, voterid, party, votername, history, address, status, ballot])
 
 # Iterate through voters.
 def voters(pagetext:str):
-	lines = pagetext.splitlines()
-	pagenumber = int(re.findall('Page (\d+) of', lines[len(lines)-1])[0])
-	print(f'Found {int((len(lines)-HEADERLINES-FOOTERLINES)/LINESPERVOTER)} voters on page {pagenumber}')
-	for n in range(HEADERLINES,len(lines)-(FOOTERLINES+1), LINESPERVOTER):
-		print(f'Iterating over voter {int((n-HEADERLINES)/3)+1}')
-		voter([lines[n], lines[n+1], lines[n+2]])
+    lines = pagetext.splitlines()
+    pagenumber = int(re.findall('Page (\d+) of', lines[-1])[0])
+    num_voters = (len(lines) - HEADERLINES - FOOTERLINES) // LINESPERVOTER
+    print(f'Found {num_voters} voters on page {pagenumber}')
+    for n in range(HEADERLINES, len(lines) - (FOOTERLINES + 1), LINESPERVOTER):
+        print(f'Iterating over voter {((n - HEADERLINES) // 3) + 1}')
+        voter([lines[n], lines[n+1], lines[n+2]])
 
 # Read PDF into pages and iterate over them as text strings.
 def read_voters_pages():
@@ -53,8 +49,4 @@ df = pd.DataFrame(
 			]
 		)
 df = df.set_index(['Voter Record #'])
-
-if TESTMODE:
-	print(df)
-
 df.to_csv(r'./Voter Participation History.csv', encoding='utf-8', index=False)
