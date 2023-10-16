@@ -1,52 +1,58 @@
-import pypdfium2 as pdfium
-import pandas as pd
-import re
+"""Extracts voter participation info from a City of Portland-provided PDF into a CSV format"""
 
-output = []
+import re
+import pandas as pd
+import pypdfium2 as pdfium
+
 TESTMODE = False
 LINESPERVOTER = 3
 HEADERLINES = 6
 FOOTERLINES = 1
 
-# Extract data from group
-def voter(lines:list):
-	ward, voterid, votername, address, status = re.findall('^(\d+\-\d+) (\d+) (.*?) (\d.*?) ([A-Z]+)$', lines[0])[0]
-	history = lines[1]
-	party, ballot = lines[2].split(' ')
-	output.append([ward, voterid, party, votername, history, address, status, ballot])
 
-# Iterate through voters.
-def voters(pagetext:str):
-	lines = pagetext.splitlines()
-	pagenumber = int(re.findall('Page (\d+) of', lines[-1])[0])
-	num_voters = (len(lines) - HEADERLINES - FOOTERLINES) // LINESPERVOTER
-	print(f'Found {num_voters} voters on page {pagenumber}')
-	for n in range(HEADERLINES, len(lines) - (FOOTERLINES + 1), LINESPERVOTER):
-		print(f'Iterating over voter {((n - HEADERLINES) // 3) + 1}')
-		voter(lines[n:n+LINESPERVOTER])
+def voter(lines:list) -> list:
+    """Extract voter data from pdf data group"""
+    ward, voterid, votername, address, status = re.findall(r"^(\d+\-\d+) (\d+) (.*?) (\d.*?) ([A-Z]+)$", lines[0])[0]
+    history = lines[1]
+    party, ballot = lines[2].split(" ")
+    return [ward, voterid, party, votername, history, address, status, ballot]
 
-# Read PDF into pages and iterate over them as text strings.
-def read_voters_pages():
-	pdf = pdfium.PdfDocument("./Voter Participation History.pdf")
-	print(f'Found {len(pdf)} pages in PDF')
-	for n in range(1,len(pdf)): # skip title page
-		voters(pdf[n].get_textpage().get_text_range())
-		if TESTMODE:
-			break
+def voters(pagetext:str) -> list:
+    """Iterate through voters from provided page"""
+    page = []
+    lines = pagetext.splitlines()
+    pagenumber = int(re.findall(r"Page (\d+) of", lines[-1])[0])
+    num_voters = (len(lines) - HEADERLINES - FOOTERLINES) // LINESPERVOTER
+    print(f"Found {num_voters} voters on page {pagenumber}")
+    for n in range(HEADERLINES, len(lines) - (FOOTERLINES + 1), LINESPERVOTER):
+        print(f"Iterating over voter {((n - HEADERLINES) // 3) + 1}")
+        page.append(voter(lines[n:n+LINESPERVOTER]))
+    return page
 
-read_voters_pages()
+def read_voters_pages() -> list:
+    """Read PDF into pages and iterate over them as text strings"""
+    all_voters = []
+    pdf = pdfium.PdfDocument("./Voter Participation History.pdf")
+    print(f"Found {len(pdf)} pages in PDF")
+    for n in range(1,len(pdf)): # skip title page
+        all_voters.extend(voters(pdf[n].get_textpage().get_text_range()))
+        if TESTMODE:
+            break
+    return all_voters
+
+
 df = pd.DataFrame(
-		data=output,
-		columns=[
-			'Ward/Precinct',
-			'Voter Record #',
-			'Party',
-			'Voter Name',
-			'History',
-			'Residence Address',
-			'Status',
-			'Ballot Type'
-			]
-		)
-df = df.set_index(['Voter Record #'])
-df.to_csv(r'./Voter Participation History.csv', encoding='utf-8', index=False)
+        data=read_voters_pages(),
+        columns=[
+            "Ward/Precinct",
+            "Voter Record #",
+            "Party",
+            "Voter Name",
+            "History",
+            "Residence Address",
+            "Status",
+            "Ballot Type"
+            ]
+        )
+df.set_index(["Voter Record #"], inplace=True)
+df.to_csv(r"./Voter Participation History.csv", encoding="utf-8", index=False)
