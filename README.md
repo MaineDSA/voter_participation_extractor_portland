@@ -1,3 +1,5 @@
+[![Pylint](https://github.com/MaineDSA/PortlandVoterParticipationParser/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/MaineDSA/PortlandVoterParticipationParser/actions/workflows/pylint.yml)
+
 # PortlandVoterParticipationParser
 The City of Portland distributes voter participation info in PDF format. This makes it a CSV.
 
