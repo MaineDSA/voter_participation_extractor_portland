@@ -24,7 +24,7 @@ def voters(pagetext:str) -> list:
     lines = pagetext.splitlines()
     pagenumber = int(re.findall(r"Page (\d+) of", lines[-1])[0])
     num_voters = (len(lines) - HEADERLINES - FOOTERLINES) // LINESPERVOTER
-    logging.info(f"Found %s voters on page %s", num_voters, pagenumber)
+    logging.info("Found %s voters on page %s", num_voters, pagenumber)
     for n in range(HEADERLINES, len(lines) - (FOOTERLINES + 1), LINESPERVOTER):
         logging.info("Iterating over voter %s", ((n - HEADERLINES) // 3) + 1)
         page.append(voter(lines[n:n+LINESPERVOTER]))
