@@ -1,6 +1,7 @@
 """Extracts voter participation info from a City of Portland-provided PDF into a CSV format"""
 
 import re
+import logging
 import pandas as pd
 import pypdfium2 as pdfium
 
@@ -23,9 +24,9 @@ def voters(pagetext:str) -> list:
     lines = pagetext.splitlines()
     pagenumber = int(re.findall(r"Page (\d+) of", lines[-1])[0])
     num_voters = (len(lines) - HEADERLINES - FOOTERLINES) // LINESPERVOTER
-    print(f"Found {num_voters} voters on page {pagenumber}")
+    logging.info(f"Found %s voters on page %s", num_voters, pagenumber)
     for n in range(HEADERLINES, len(lines) - (FOOTERLINES + 1), LINESPERVOTER):
-        print(f"Iterating over voter {((n - HEADERLINES) // 3) + 1}")
+        logging.info("Iterating over voter %s", ((n - HEADERLINES) // 3) + 1)
         page.append(voter(lines[n:n+LINESPERVOTER]))
     return page
 
@@ -33,7 +34,7 @@ def read_voters_pages() -> list:
     """Read PDF into pages and iterate over them as text strings"""
     all_voters = []
     pdf = pdfium.PdfDocument("./Voter Participation History.pdf")
-    print(f"Found {len(pdf)} pages in PDF")
+    logging.info("Found %s pages in PDF", len(pdf))
     for n in range(1,len(pdf)): # skip title page
         all_voters.extend(voters(pdf[n].get_textpage().get_text_range()))
         if TESTMODE:
