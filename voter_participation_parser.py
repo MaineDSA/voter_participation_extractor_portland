@@ -13,9 +13,7 @@ FOOTERLINES = 1
 
 def voter(lines: list) -> list:
     """Extract voter data from pdf data group"""
-    ward, voterid, votername, address, status = re.findall(
-        r"^(\d+\-\d+) (\d+) (.*?) (\d.*?) ([A-Z]+)$", lines[0]
-    )[0]
+    ward, voterid, votername, address, status = re.findall(r"^(\d+\-\d+) (\d+) (.*?) (\d.*?) ([A-Z]+)$", lines[0])[0]
     history = lines[1]
     party, ballot = lines[2].split(" ")
     return [ward, voterid, party, votername, history, address, status, ballot]
