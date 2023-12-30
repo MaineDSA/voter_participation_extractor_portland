@@ -46,18 +46,24 @@ def read_voters_pages() -> list:
     return all_voters
 
 
-df = pd.DataFrame(
-    data=read_voters_pages(),
-    columns=[
-        "Ward/Precinct",
-        "Voter Record #",
-        "Party",
-        "Voter Name",
-        "History",
-        "Residence Address",
-        "Status",
-        "Ballot Type",
-    ],
-)
-df.set_index(["Voter Record #"], inplace=True)
-df.to_csv(r"./Voter Participation History.csv", encoding="utf-8", index=False)
+def main():
+    """Extracts voter participation info from a City of Portland-provided PDF into a CSV format"""
+    df = pd.DataFrame(
+        data=read_voters_pages(),
+        columns=[
+            "Ward/Precinct",
+            "Voter Record #",
+            "Party",
+            "Voter Name",
+            "History",
+            "Residence Address",
+            "Status",
+            "Ballot Type",
+        ],
+    )
+    df.set_index(["Voter Record #"], inplace=True)
+    df.to_csv(r"./Voter Participation History.csv", encoding="utf-8", index=False)
+
+
+if __name__ == "__main__":
+    main()
