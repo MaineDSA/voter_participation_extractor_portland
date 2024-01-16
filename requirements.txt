@@ -1,2 +1,0 @@
-pandas==2.1.4
-pypdfium2==4.26.0
