@@ -15,7 +15,7 @@ license = { "file" = "LICENSE" }
 authors = [{ "name" = "bmos", "email" = "wil.t.dsa@pm.me" }]
 urls = { "GitHub" = "https://github.com/MaineDSA/voter_participation_extractor_portland" }
 dependencies = [
-    "pandas==2.1.4",
+    "pandas==2.2.0",
     "pypdfium2==4.25.0"
 ]
 
