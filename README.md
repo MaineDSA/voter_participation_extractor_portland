@@ -1,6 +1,7 @@
-[![Pylint](https://github.com/MaineDSA/PortlandVoterParticipationParser/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/MaineDSA/PortlandVoterParticipationParser/actions/workflows/pylint.yml)
+[![Ruff](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/lint-python.yml/badge.svg)](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/lint-python.yml)
 
 # Voter Participation Data Extractor for Portland, Maine
+
 The City of Portland distributes voter participation info in PDF format. This makes it a CSV.
 
 ## Prerequisites
