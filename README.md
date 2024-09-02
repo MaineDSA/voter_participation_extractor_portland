@@ -1,4 +1,4 @@
-[![Ruff](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/lint-python.yml/badge.svg)](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/lint-python.yml)
+[![Ruff](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/ruff.yml/badge.svg)](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/ruff.yml)
 
 # Voter Participation Data Extractor for Portland, Maine
 
