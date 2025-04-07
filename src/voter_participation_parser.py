@@ -1,4 +1,4 @@
-"""Extracts voter participation info from a City of Portland-provided PDF into a CSV format"""
+"""Extract voter participation info from a City of Portland-provided PDF into a CSV format."""
 
 import logging
 import re
@@ -11,9 +11,11 @@ LINESPERVOTER = 3
 HEADERLINES = 6
 FOOTERLINES = 1
 
+logger = logging.getLogger(__name__)
+
 
 def voter(lines: list) -> list:
-    """Extract voter data from pdf data group"""
+    """Extract voter data from pdf data group."""
     ward, voterid, votername, address, status = re.findall(r"^(\d+-\d+) (\d+) (.*?) (\d.*?) ([A-Z]+)$", lines[0])[0]
     history = lines[1]
     party, ballot = lines[2].split(" ")
@@ -21,23 +23,23 @@ def voter(lines: list) -> list:
 
 
 def voters(pagetext: str) -> list:
-    """Iterate through voters from provided page"""
+    """Iterate through voters from provided page."""
     page = []
     lines = pagetext.splitlines()
     pagenumber = int(re.findall(r"Page (\d+) of", lines[-1])[0])
     num_voters = (len(lines) - HEADERLINES - FOOTERLINES) // LINESPERVOTER
-    logging.info("Found %s voters on page %s", num_voters, pagenumber)
+    logger.info("Found %s voters on page %s", num_voters, pagenumber)
     for n in range(HEADERLINES, len(lines) - (FOOTERLINES + 1), LINESPERVOTER):
-        logging.info("Iterating over voter %s", ((n - HEADERLINES) // 3) + 1)
-        page.append(voter(lines[n: n + LINESPERVOTER]))
+        logger.info("Iterating over voter %s", ((n - HEADERLINES) // 3) + 1)
+        page.append(voter(lines[n : n + LINESPERVOTER]))
     return page
 
 
 def read_voters_pages() -> list:
-    """Read PDF into pages and iterate over them as text strings"""
+    """Read PDF into pages and iterate over them as text strings."""
     all_voters = []
     pdf = pdfium.PdfDocument("./Voter Participation History.pdf")
-    logging.info("Found %s pages in PDF", len(pdf))
+    logger.info("Found %s pages in PDF", len(pdf))
     for n in range(1, len(pdf)):  # skip title page
         all_voters.extend(voters(pdf[n].get_textpage().get_text_range()))
         if TESTMODE:
@@ -45,8 +47,8 @@ def read_voters_pages() -> list:
     return all_voters
 
 
-def main():
-    """Extracts voter participation info from a City of Portland-provided PDF into a CSV format"""
+def main() -> None:
+    """Extract voter participation info from a City of Portland-provided PDF into a CSV format."""
     df = pd.DataFrame(
         data=read_voters_pages(),
         columns=[
