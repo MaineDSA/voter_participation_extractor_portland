@@ -72,6 +72,13 @@ ignore = [
     "D212",
 ]
 
+[tool.mypy]
+[[tool.mypy.overrides]]
+module = [
+    "pypdfium2",
+]
+ignore_missing_imports = true
+
 [tool.bandit]
 exclude_dirs = [
     "./tests/",
