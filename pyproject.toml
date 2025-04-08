@@ -13,13 +13,9 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "bandit[toml]==1.8.3",
+    "bandit[toml,sarif]==1.8.3",
     "pre-commit==4.2.0",
     "ruff==0.11.4"
-]
-github-actions = [
-    "coverage==7.8.0",
-    "pytest-cov==6.0.0",
 ]
 
 [tool.ruff]
@@ -72,30 +68,6 @@ ignore = [
     "D104",
     "D203",
     "D212",
-]
-
-[tool.pytest.ini_options]
-addopts = "--cov=src -n auto"
-testpaths = [
-    "tests",
-]
-
-[tool.coverage.run]
-branch = true
-relative_files = true
-command_line = "-m pytest"
-
-[tool.coverage.paths]
-source = [
-    "src/",
-]
-omit = [
-    "tests",
-]
-
-[tool.coverage.report]
-exclude_also = [
-    "logger.",
 ]
 
 [tool.bandit]
