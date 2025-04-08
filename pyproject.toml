@@ -17,10 +17,14 @@ dev = [
     "pre-commit==4.2.0",
     "ruff==0.11.4"
 ]
+github-actions = [
+    "coverage==7.8.0",
+    "pytest-cov==6.0.0",
+]
 
 [tool.ruff]
 line-length = 160
-target-version = "py39"
+target-version = "py311"
 include = [
     "src/**/*.py",
     "tests/**/*.py",
@@ -70,8 +74,32 @@ ignore = [
     "D212",
 ]
 
+[tool.pytest.ini_options]
+addopts = "--cov=src -n auto"
+testpaths = [
+    "tests",
+]
+
+[tool.coverage.run]
+branch = true
+relative_files = true
+command_line = "-m pytest"
+
+[tool.coverage.paths]
+source = [
+    "src/",
+]
+omit = [
+    "tests",
+]
+
+[tool.coverage.report]
+exclude_also = [
+    "logger.",
+]
+
 [tool.bandit]
 exclude_dirs = [
-    "tests/",
-    ".venv/",
+    "./tests/",
+    "./.venv/",
 ]
