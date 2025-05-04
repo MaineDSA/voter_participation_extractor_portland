@@ -1,4 +1,5 @@
-[![Ruff](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/ruff.yml/badge.svg)](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/ruff.yml)
+[![CodeQL](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/github-code-scanning/codeql)
+[![Python checks](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/python.yml/badge.svg)](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/python.yml)
 
 # Voter Participation Data Extractor for Portland, Maine
 
