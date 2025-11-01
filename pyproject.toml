@@ -8,7 +8,7 @@ authors = [{ "name" = "bmos", "email" = "wil.t.dsa@pm.me" }]
 urls = { "GitHub" = "https://github.com/MaineDSA/voter_participation_extractor_portland" }
 dependencies = [
     "pandas==2.3.3",
-    "pypdfium2==4.30.1"
+    "pypdfium2==5.0.0"
 ]
 
 [project.optional-dependencies]
