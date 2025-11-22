@@ -15,7 +15,7 @@ dependencies = [
 dev = [
     "bandit[sarif]==1.9.1",
     "mypy~=1.18.2",
-    "pandas-stubs~=2.2.3.250308",
+    "pandas-stubs~=2.2.2.240807",
     "pre-commit~=4.4.0",
     "ruff==0.14.5",
 ]
