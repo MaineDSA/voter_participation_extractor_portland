@@ -99,3 +99,4 @@ ignore = [
 module = [
     "pypdfium2",
 ]
+ignore_missing_imports = true
