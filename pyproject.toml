@@ -13,12 +13,15 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "bandit[sarif]==1.9.1",
+    "bandit[sarif]==1.9.2",
     "mypy~=1.19.0",
     "pandas-stubs~=2.2.3.250308",
     "pre-commit~=4.4.0",
-    "ruff==0.14.5",
+    "ruff==0.14.7",
+    "ssort==0.15.0",
 ]
+
+[tool]
 
 [tool.ruff]
 line-length = 160
@@ -54,6 +57,7 @@ extend-select = [
     "LOG",  # flake8-logging (LOG)
     "N",  # pep8-naming (N)
     "PIE",  # flake8-pie (PIE)
+    "PL",  # Pylint (PL)
     "PT",  # flake8-pytest-style (PT)
     "PTH",  # flake8-use-pathlib (PTH)
     "Q",  # flake8-quotes (Q)
@@ -84,7 +88,14 @@ ignore = [
     "FIX002",  # line-contains-todo (FIX002)
 ]
 
+[tool.ruff.lint.per-file-ignores]
+"**/{tests,docs}/*" = [
+    "SLF001",  # private-member-access (SLF001)
+    "PLR2004",  # magic-value-comparison (PLR2004)
+]
+
 [tool.mypy]
+
 [[tool.mypy.overrides]]
 module = [
     "pypdfium2",
