@@ -1,5 +1,6 @@
 [![CodeQL](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/github-code-scanning/codeql)
 [![Python checks](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/python.yml/badge.svg)](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/python.yml)
+[![Coverage badge](https://raw.githubusercontent.com/MaineDSA/voter_participation_extractor_portland/python-coverage-comment-action-data/badge.svg)](https://htmlpreview.github.io/?https://github.com/MaineDSA/voter_participation_extractor_portland/blob/python-coverage-comment-action-data/htmlcov/index.html)
 
 # Voter Participation Data Extractor for Portland, Maine
 
