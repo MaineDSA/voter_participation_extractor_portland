@@ -8,6 +8,7 @@ from pathlib import Path
 import pandas as pd
 import pypdfium2 as pdfium
 
+logging.basicConfig(level=logging.INFO, format="%(levelname)s : voter_participation_extractor_portland:%(name)s : %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -156,8 +157,6 @@ def save_voters_to_csv(voters: list[VoterRecord], output_path: Path) -> None:
 
 def main() -> None:
     """Extract voter participation info from PDF and save to CSV."""
-    logging.basicConfig(level=logging.INFO)
-
     pdf_path = Path("./Voter Participation History.pdf")
     csv_path = Path("./Voter Participation History.csv")
 
