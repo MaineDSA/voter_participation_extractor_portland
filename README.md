@@ -1,5 +1,6 @@
 [![CodeQL](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/github-code-scanning/codeql)
 [![Python checks](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/python.yml/badge.svg)](https://github.com/MaineDSA/voter_participation_extractor_portland/actions/workflows/python.yml)
+[![Coverage badge](https://raw.githubusercontent.com/MaineDSA/voter_participation_extractor_portland/python-coverage-comment-action-data/badge.svg)](https://htmlpreview.github.io/?https://github.com/MaineDSA/voter_participation_extractor_portland/blob/python-coverage-comment-action-data/htmlcov/index.html)
 
 # Voter Participation Data Extractor for Portland, Maine
 
@@ -7,7 +8,7 @@ The City of Portland distributes voter participation info in PDF format. This ma
 
 ## Prerequisites
 
-To run this code, you'll need to have Python 3.9, 3.10, 3.11, or 3.12 installed on your machine. You'll also need to install the required packages by running the following command from inside the project folder:
+To run this code, you'll need to have Python 3.10+ installed on your machine. You'll also need to install the required packages by running the following command from inside the project folder:
 
 ```shell
 python3 -m pip install -r requirements.txt
