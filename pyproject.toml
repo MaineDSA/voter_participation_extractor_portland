@@ -17,6 +17,9 @@ dev = [
     "mypy~=1.19.0",
     "pandas-stubs~=2.2.3.250308",
     "pre-commit~=4.4.0",
+    "pytest-cov~=7.0.0",
+    "pytest-xdist~=3.8.0",
+    "pytest~=9.0.2",
     "ruff==0.14.7",
     "ssort==0.15.0",
 ]
@@ -92,6 +95,25 @@ ignore = [
 "**/{tests,docs}/*" = [
     "SLF001",  # private-member-access (SLF001)
     "PLR2004",  # magic-value-comparison (PLR2004)
+]
+
+[tool.pytest]
+addopts = ["-n", "auto", "--cov=src", "--no-cov-on-fail"]
+testpaths = [
+    "tests",
+]
+
+[tool.coverage]
+
+[tool.coverage.run]
+branch = true
+relative_files = true
+
+[tool.coverage.report]
+exclude_also = [
+    "logger.",
+    'if __name__ == "__main__":',
+    "main\\(\\)",
 ]
 
 [tool.mypy]
