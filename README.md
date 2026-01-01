@@ -7,7 +7,7 @@ The City of Portland distributes voter participation info in PDF format. This ma
 
 ## Prerequisites
 
-To run this code, you'll need to have Python 3.9, 3.10, 3.11, or 3.12 installed on your machine. You'll also need to install the required packages by running the following command from inside the project folder:
+To run this code, you'll need to have Python 3.10+ installed on your machine. You'll also need to install the required packages by running the following command from inside the project folder:
 
 ```shell
 python3 -m pip install -r requirements.txt

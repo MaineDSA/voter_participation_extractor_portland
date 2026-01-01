@@ -2,7 +2,7 @@
 name = "voter_participation_extractor_portland_maine"
 version = "1.0.2"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = { "file" = "LICENSE" }
 authors = [{ "name" = "Ramona T", "email" = "ramona.t.dsa@pm.me" }]
 urls = { "GitHub" = "https://github.com/MaineDSA/voter_participation_extractor_portland" }
