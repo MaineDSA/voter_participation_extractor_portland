@@ -2,8 +2,8 @@
 
 import logging
 import re
+from dataclasses import dataclass
 from pathlib import Path
-from typing import NamedTuple
 
 import pandas as pd
 import pypdfium2 as pdfium
@@ -11,7 +11,8 @@ import pypdfium2 as pdfium
 logger = logging.getLogger(__name__)
 
 
-class VoterRecord(NamedTuple):
+@dataclass(frozen=True)
+class VoterRecord:
     """Structured voter record data."""
 
     ward_precinct: str
@@ -135,7 +136,7 @@ def save_voters_to_csv(voters: list[VoterRecord], output_path: Path) -> None:
     output_path: Path for the output CSV file
 
     """
-    df = pd.DataFrame(voters, columns=VoterRecord._fields)
+    df = pd.DataFrame([vars(v) for v in voters])
 
     # Rename columns for clarity
     df.columns = [
