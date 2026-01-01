@@ -45,6 +45,7 @@ def parse_voter_lines(lines: list[str]) -> VoterRecord:
 
     Raises:
     ValueError: If lines don't match expected format
+
     """
     try:
         match = re.search(r"^(\d+-\d+) (\d+) (.*?) (\d.*?) ([A-Z]+)$", lines[0])
@@ -71,6 +72,7 @@ def extract_voters_from_page(page_text: str) -> list[VoterRecord]:
 
     Returns:
     List of VoterRecord objects
+
     """
     lines = page_text.splitlines()
 
@@ -107,6 +109,7 @@ def read_pdf_voters(pdf_path: Path) -> list[VoterRecord]:
 
     Returns:
     List of all VoterRecord objects from the PDF
+
     """
     all_voters = []
 
@@ -130,6 +133,7 @@ def save_voters_to_csv(voters: list[VoterRecord], output_path: Path) -> None:
     Args:
     voters: List of VoterRecord objects
     output_path: Path for the output CSV file
+
     """
     df = pd.DataFrame(voters, columns=VoterRecord._fields)
 
