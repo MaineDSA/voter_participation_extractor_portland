@@ -40,7 +40,7 @@ jobs:
           disable-sudo: true
           egress-policy: audit
 
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
         with:
@@ -81,7 +81,7 @@ jobs:
             github.com:443
             pypi.org:443
 
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
         with:
@@ -118,7 +118,7 @@ jobs:
             github.com:443
             pypi.org:443
 
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
         with:
@@ -166,7 +166,7 @@ jobs:
             github.com:443
             pypi.org:443
 
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
         with:
@@ -203,7 +203,7 @@ jobs:
             github.com:443
             pypi.org:443
 
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
         with:
@@ -229,7 +229,7 @@ jobs:
             github.com:443
             pypi.org:443
 
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
         with:
@@ -266,7 +266,7 @@ jobs:
             github.com:443
             img.shields.io:443
 
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131
         with:
@@ -307,7 +307,7 @@ jobs:
             proxy.golang.org:443
             pypi.org:443
 
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
 
       - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
         with:
