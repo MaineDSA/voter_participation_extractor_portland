@@ -1,7 +1,9 @@
 """Tests for voter participation PDF extraction."""
 
 import textwrap
+from pathlib import Path
 
+import pandas as pd
 import pytest
 
 from src.voter_participation_parser import (
@@ -9,6 +11,7 @@ from src.voter_participation_parser import (
     VoterRecord,
     extract_voters_from_page,
     parse_voter_lines,
+    save_voters_to_csv,
 )
 
 
@@ -249,6 +252,58 @@ class TestExtractVotersFromPage:
 
         voters = extract_voters_from_page(page_text)
         assert len(voters) == 0
+
+
+class TestSaveVotersToCSV:
+    """Tests for save_voters_to_csv function."""
+
+    def test_save_voters_to_csv_creates_file(self, tmp_path: Path) -> None:
+        """Test that the CSV is created with correct content and headers."""
+        voters = [
+            VoterRecord(
+                ward_precinct="1-1",
+                voter_id="1001",
+                party="DEM",
+                name="Alice Smith",
+                history="2022-11-08",
+                address="10 Main St",
+                status="ACTIVE",
+                ballot_type="Regular Ballot",
+            ),
+            VoterRecord(
+                ward_precinct="2-2", voter_id="1002", party="REP", name="Bob Jones", history="", address="20 Oak Rd", status="INACTIVE", ballot_type="Absentee"
+            ),
+        ]
+
+        output_file = tmp_path / "test_output.csv"
+        save_voters_to_csv(voters, output_file)
+        assert output_file.exists()
+
+        df = pd.read_csv(output_file)
+        assert len(df) == 2
+
+        expected_columns = [
+            "Ward/Precinct",
+            "Voter Record #",
+            "Party",
+            "Voter Name",
+            "History",
+            "Residence Address",
+            "Status",
+            "Ballot Type",
+        ]
+        assert list(df.columns) == expected_columns
+
+        assert df.iloc[0]["Voter Name"] == "Alice Smith"
+        assert df.iloc[1]["Party"] == "REP"
+        assert str(df.iloc[0]["Voter Record #"]) == "1001"
+
+    def test_save_empty_voter_list_no_file(self, tmp_path: Path) -> None:
+        """Test that no CSV is created if the voter list is empty."""
+        output_file = tmp_path / "should_not_exist.csv"
+        save_voters_to_csv([], output_file)
+
+        assert not output_file.exists(), "CSV should not be created for an empty voter list"
 
 
 class TestPDFConfig:

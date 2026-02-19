@@ -137,6 +137,10 @@ def save_voters_to_csv(voters: list[VoterRecord], output_path: Path) -> None:
     output_path: Path for the output CSV file
 
     """
+    if not voters:
+        logger.warning("No voter records found. Skipping CSV creation.")
+        return
+
     df = pd.DataFrame([vars(v) for v in voters])
 
     # Rename columns for clarity
