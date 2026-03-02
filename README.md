@@ -12,7 +12,7 @@ To run this code, you'll need to have Python 3.11+ installed on your machine. Yo
 
 ```shell
 pip install uv
-uv pip install .[dev]
+uv sync
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ uv pip install .[dev]
 2. Open a terminal and run the following command to extract data:
 
 ```shell
-python -m voter_participation_extractor_portland
+python -m src\voter_participation_parser.py
 ```
 
 3. Unless there is a problem, you output will be saved as "Voter Participation History.csv".

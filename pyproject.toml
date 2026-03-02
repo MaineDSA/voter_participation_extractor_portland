@@ -11,25 +11,47 @@ dependencies = [
     "pypdfium2~=5.5"
 ]
 
-[project.optional-dependencies]
-dev = [
-    "bandit[sarif]==1.9.3",
-    "mypy~=1.19",
-    "pandas-stubs~=3.0",
-    "pre-commit~=4.5",
-    "pytest-cov~=7.0",
-    "pytest-xdist~=3.8",
-    "pytest~=9.0",
-    "ruff==0.15.1",
-    "ssort==0.16.0",
-]
-
 [project.scripts]
 voter_participation_extractor_portland = "src.voter_participation_parser:main"
 
 [build-system]
-requires = ["setuptools>=80.0"]
+requires = [
+    "build>=1.4",
+    "setuptools>=82.0",
+]
 build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    {include-group = "lint"},
+    {include-group = "pre-commit"},
+    {include-group = "security"},
+    {include-group = "test-coverage"},
+    {include-group = "types"},
+]
+lint = [
+    "ruff==0.15.4",
+    "ssort==0.16.0",
+]
+pre-commit = [
+    "pre-commit~=4.5",
+]
+security = [
+    "bandit[sarif]==1.9.4",
+]
+test-coverage = [
+    "pytest-cov~=7.0.0",
+    {include-group = "test"},
+]
+test = [
+    "pytest-cov~=7.0",
+    "pytest-xdist~=3.8",
+    "pytest~=9.0",
+]
+types = [
+    "mypy~=1.19",
+    "pandas-stubs~=3.0",
+]
 
 [tool]
 
