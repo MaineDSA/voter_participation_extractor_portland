@@ -16,7 +16,7 @@ voter_participation_extractor_portland = "src.voter_participation_parser:main"
 
 [build-system]
 requires = [
-    "build>=1.4",
+    "build>=1.5.0",
     "setuptools>=82.0.1",
 ]
 build-backend = "setuptools.build_meta"
