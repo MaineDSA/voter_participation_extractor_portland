@@ -46,7 +46,7 @@ test-coverage = [
 test = [
     "pytest-cov~=7.0",
     "pytest-xdist~=3.8",
-    "pytest~=9.0",
+    "pytest~=9.1",
 ]
 types = [
     "mypy~=2.1",
