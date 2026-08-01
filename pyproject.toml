@@ -49,7 +49,7 @@ test = [
     "pytest~=9.1",
 ]
 types = [
-    "mypy~=2.1",
+    "mypy~=2.3",
     "pandas-stubs~=3.0",
 ]
 
